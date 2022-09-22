@@ -1,0 +1,12 @@
+{
+    "name": "asikt/kolesa-upgrade-homework-3",
+    "description": "asilkhan/json",
+    "autoload": {
+        "psr-4": {
+            "Asikt\\KolesaUpgradeHomework3\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
