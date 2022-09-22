@@ -26,6 +26,7 @@
       $url = $jsonCategory['name'];
       echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."?category_ids=" . $jsonCategory['id'] . "'>" . $jsonCategory['name'] . "</a><br>";
     }
+    echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."'>random cat</a><br>";
   } catch (GuzzleHttp\Exception\ClientException $e) {
     echo $e->getResponse()->getStatusCode() . " " . $e->getResponse()->getReasonPhrase();
   } catch (GuzzleHttp\Exception\ServerException $e) {
@@ -57,6 +58,5 @@
 
 
   ?>
-
 </html>
 </body>
