@@ -1,18 +1,21 @@
 <?php
 
-$api_url = "https://api.thecatapi.com/v1/images/search";
-$content = file_get_contents($api_url);
-$content_json = json_decode($content, true)[0];
+$autoloadPath = __DIR__ . "/vendor/autoload.php";
 
-$cat_url = $content_json["url"]; 
-$img_width = $content_json["width"];
-$img_height = $content_json["height"];
+require_once $autoloadPath;
+require_once 'tools.php';
+require_once 'settings.php';
 
+use GuzzleHttp\Client;
 
-?>
+$client = new Client([
+    'base_uri' => $base_uri,
+    'timeout' => 2.0,
+]);
 
-<html>
-    <body>
-        <img width="<?php echo $img_width?>" height="<?php echo $img_height?>" src="<?php echo $cat_url ?>"/>
-    </body>
-</html>
+$content = $client->get($api_path);
+$content_json = json_decode($content->getBody()->getContents(), true)[0] ?? null;
+
+$cat_url = $content_json['url'] ?? null;
+
+echo is_null($cat_url) ? "Wrong address" : template('template.php', ['cat_url' => $cat_url]);
