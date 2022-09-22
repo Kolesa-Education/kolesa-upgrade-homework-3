@@ -24,13 +24,13 @@
 
 #### Опишите подробно, что выводит команда `curl -I https://kolesa.kz/`. В частности, напишите, что означают строки `HTTP/2 200`, `server: nginx` и другие.
   >Команда выводит заголовки HTTP ответа. В моём случае:
-    >>HTTP/1.1 301 Moved Permanently  - HTTP статус 301
-    >>Server: nginx - Сервер
-    >>Date: Thu, 22 Sep 2022 07:15:43 GMT - Дата отправки
-    >>Content-Type: text/html - Тип возвращаемых данных
-    >>Content-Length: 162 - Размер данных в байтах
-    >>Connection: keep-alive - Разрешение на многократные запросы
-    >>Location: https://kolesa.kz/ - адрес
+    > >HTTP/1.1 301 Moved Permanently  - HTTP статус 301
+    > >Server: nginx - Сервер
+    > >Date: Thu, 22 Sep 2022 07:15:43 GMT - Дата отправки
+    > >Content-Type: text/html - Тип возвращаемых данных
+    > >Content-Length: 162 - Размер данных в байтах
+    > >Connection: keep-alive - Разрешение на многократные запросы
+    > >Location: https://kolesa.kz/ - адрес
 
 #### Что означает флаг `-I`?
   >Вывод только заголовков
