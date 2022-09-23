@@ -14,22 +14,16 @@ require_once $autoloadPath;
 
 use App\Tools\CatsGallery;
 use App\Tools\TemplateEngine;
-use App\Tools\UnknownParametrException;
 
 $gallery = new CatsGallery($client_settings, $api_path);
-$cat_url = $gallery->getRandomUrl();
-if(is_null($cat_url)){
-    echo "404 Not Found";
-    exit();
-}
-
 $template_engine = new TemplateEngine();
 try
 {
+    $cat_url = $gallery->getRandomUrl();
     $html_output = $template_engine->render($template_path, ["cat_url"=>$cat_url]);
     echo $html_output;
-}catch(UnknownParametrException $e){
-    echo "Template error";
+}catch(Throwable $e){
+    echo $e->getMessage();
 }
 
 

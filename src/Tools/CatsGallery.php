@@ -2,6 +2,7 @@
 
 namespace App\Tools;
 
+use ErrorException;
 use GuzzleHttp\Client;
 
 class CatsGallery{
@@ -19,13 +20,8 @@ class CatsGallery{
         $response = $this->client->get($this->api_path);
         $content_json = json_decode($response->getBody()->getContents(), true)[0] ?? null;
         $cat_url = $content_json['url'] ?? null;
+        if(is_null($cat_url))throw new ErrorException("Something wrong with url");
         return $cat_url;
-    }
-
-
-    public function getClient(): Client
-    {
-        return $this->client;
     }
 
     public function setClient(Client $client): self
@@ -33,11 +29,6 @@ class CatsGallery{
         $this->client = $client;
 
         return $this;
-    }
-
-    public function getApiPath(): string
-    {
-        return $this->api_path;
     }
 
     public function setApiPath(string $api_path): self
