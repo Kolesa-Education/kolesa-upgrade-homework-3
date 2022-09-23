@@ -23,7 +23,7 @@ class CatPictureService
         $response = $this->client->get(uri: 'v1/categories');
         $result = json_decode($response->getBody()->getContents(), associative: true);
         asort($result);
-        foreach ($result as $key => $category) {
+        foreach ($result as $category) {
             echo $category["id"] . ' - ' . $category["name"] . PHP_EOL . '<br>';
         }
     }
@@ -60,5 +60,3 @@ class CatPictureService
         }
     }
 }
-
-// EOF

@@ -1,7 +1,6 @@
 <?php
 $autoloadPath = __DIR__ . '/vendor/autoload.php';
 require_once $autoloadPath;
-require_once 'src\CatPictureService.php';
 
 use cat\CatPictureService as Cat;
 ?>
