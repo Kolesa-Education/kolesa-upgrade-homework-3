@@ -11,10 +11,10 @@ $client_settings = [
 ];
 
 require_once $autoloadPath;
-require_once 'template_engine.php';
-require_once 'cats_gallery.php';
 
-
+use App\Tools\CatsGallery;
+use App\Tools\TemplateEngine;
+use App\Tools\UnknownParametrException;
 
 $gallery = new CatsGallery($client_settings, $api_path);
 $cat_url = $gallery->getRandomUrl();
@@ -28,7 +28,7 @@ try
 {
     $html_output = $template_engine->render($template_path, ["cat_url"=>$cat_url]);
     echo $html_output;
-}catch(NoTemplateValue $e){
+}catch(UnknownParametrException $e){
     echo "Template error";
 }
 

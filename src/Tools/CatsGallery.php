@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tools;
+
 use GuzzleHttp\Client;
 
 class CatsGallery{
