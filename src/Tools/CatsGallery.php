@@ -7,21 +7,21 @@ use GuzzleHttp\Client;
 
 class CatsGallery{
     private Client $client;
-    private string $api_path;
+    private string $apiPath;
 
-    function __construct(array $client_settings, string $api_path)
+    function __construct(array $clientSettings, string $apiPath)
     {
-        $this->setClient(new Client($client_settings));
-        $this->setApiPath($api_path);
+        $this->setClient(new Client($clientSettings));
+        $this->setApiPath($apiPath);
     }
 
     function getRandomUrl():string | null
     {
-        $response = $this->client->get($this->api_path);
-        $content_json = json_decode($response->getBody()->getContents(), true)[0] ?? null;
-        $cat_url = $content_json['url'] ?? null;
-        if(is_null($cat_url))throw new ErrorException("Something wrong with url");
-        return $cat_url;
+        $response = $this->client->get($this->apiPath);
+        $contentJson = json_decode($response->getBody()->getContents(), true)[0] ?? null;
+        $catUrl = $contentJson['url'] ?? null;
+        if(is_null($catUrl))throw new ErrorException("Something wrong with url");
+        return $catUrl;
     }
 
     public function setClient(Client $client): self
@@ -31,9 +31,9 @@ class CatsGallery{
         return $this;
     }
 
-    public function setApiPath(string $api_path): self
+    public function setApiPath(string $apiPath): self
     {
-        $this->api_path = $api_path;
+        $this->apiPath = $apiPath;
 
         return $this;
     }

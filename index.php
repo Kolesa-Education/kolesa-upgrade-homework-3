@@ -1,27 +1,30 @@
 <?php
 
 $autoloadPath = __DIR__ . "/vendor/autoload.php";
-$path =  $_SERVER["PATH_INFO"] ?? null;
-$base_uri = 'https://api.thecatapi.com/';
-$api_path = $path == null ? 'v1/images/search' : 'v1/images/search' . '/?category_ids='.substr($path, 1, strlen($path)-1);
-$template_path = "templates/template.mytpl";
-$client_settings = [
-    'base_uri' => $base_uri,
-    'timeout' => 2.0,
-];
-
 require_once $autoloadPath;
 
 use App\Tools\CatsGallery;
 use App\Tools\TemplateEngine;
 
-$gallery = new CatsGallery($client_settings, $api_path);
-$template_engine = new TemplateEngine();
+const BASE_URI = 'https://api.thecatapi.com/';
+const TEMPLATE_PATH = "templates/template.mytpl";
+const CLIENT_SETTINGS = [
+    'base_uri' => BASE_URI,
+    'timeout' => 2.0,
+];
+
+$path =  $_SERVER["PATH_INFO"] ?? null;
+$apiPath = $path == null ? 'v1/images/search' : 'v1/images/search' . '/?category_ids='.substr($path, 1, strlen($path)-1);
+
+
+$gallery = new CatsGallery(CLIENT_SETTINGS, $apiPath);
+$templateEngine = new TemplateEngine();
+
 try
 {
-    $cat_url = $gallery->getRandomUrl();
-    $html_output = $template_engine->render($template_path, ["cat_url"=>$cat_url]);
-    echo $html_output;
+    $catUrl = $gallery->getRandomUrl();
+    $htmlOutput = $templateEngine->render(TEMPLATE_PATH, ["catUrl"=>$catUrl]);
+    echo $htmlOutput;
 }catch(Throwable $e){
     echo $e->getMessage();
 }

@@ -14,16 +14,16 @@ class TemplateEngine{
 
     private function loadTemplate(string $templatePath):string
     {
-        $file_content = file_get_contents($templatePath);
-        return $file_content;
+        $fileContent = file_get_contents($templatePath);
+        return $fileContent;
     }
 
     private function substituteVariables(string $template, array $data=[]):string
     {
         foreach($data as $key => $variable){
-            $templated_key = '{{$' . $key . "}}";
-            if(!strpos($template, $templated_key))throw new ErrorException("Variable doesn't exist in template");
-            $template = str_replace($templated_key, $variable, $template);
+            $templatedKey = '{{$' . $key . "}}";
+            if(!strpos($template, $templatedKey))throw new ErrorException("Variable doesn't exist in template");
+            $template = str_replace($templatedKey, $variable, $template);
         }
         
         return $template;
