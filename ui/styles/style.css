@@ -1,0 +1,118 @@
+* {
+    margin: 0 auto;
+}
+
+body {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 12px;
+    background-image: url("/ui/images/bg.jpeg");
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #142a38;
+    align-items: center;
+    border-radius: 60px;
+    min-width: 250px;
+}
+
+a {
+    text-decoration: none;
+}
+
+h3 {
+    color: #fff;
+    text-shadow: 0px 3px #000;
+}
+
+
+img {
+    border-radius: 10%;
+}
+
+.main-container {
+    width: 1240px;
+    max-width: 80%;
+    padding: 20px;
+}
+
+.main-content {
+    min-width: 250px;
+    background-color: #c7d663;
+    opacity: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 30px;
+    justify-content: center;
+}
+
+.header_text {
+    margin: 10px 20px 10px 20px;
+    display: flex;
+    font-size: 30px;
+    color: #244860;
+    text-shadow: -0 -1px 0 #C7D663, 0 -1px 0 #C7D663, -0 1px 0 #C7D663, 0 1px 0 #C7D663, -1px -0 0 #C7D663, 1px -0 0 #C7D663, -1px 0 0 #C7D663, 1px 0 0 #C7D663, -1px -1px 0 #C7D663, 1px -1px 0 #C7D663, -1px 1px 0 #C7D663, 1px 1px 0 #C7D663, -1px -1px 0 #C7D663, 1px -1px 0 #C7D663, -1px 1px 0 #C7D663, 1px 1px 0 #C7D663;
+}
+
+@media screen and (max-width: 620px) {
+    .searchBox:hover>.searchInput {
+        width: 150px;
+        padding: 0 6px;
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #142a38;
+    align-items: center;
+    border-radius: 30px;
+    display: flex;
+    font-size: 20px;
+    text-align: center;
+    color: #c7d663;
+    align-self: flex-end;
+    padding: 15px;
+}
+
+b {
+    color: #244860;
+    text-decoration: none;
+    text-shadow: -0 -1px 0 #C7D663, 0 -1px 0 #C7D663, -0 1px 0 #C7D663, 0 1px 0 #C7D663, -1px -0 0 #C7D663, 1px -0 0 #C7D663, -1px 0 0 #C7D663, 1px 0 0 #C7D663, -1px -1px 0 #C7D663, 1px -1px 0 #C7D663, -1px 1px 0 #C7D663, 1px 1px 0 #C7D663, -1px -1px 0 #C7D663, 1px -1px 0 #C7D663, -1px 1px 0 #C7D663, 1px 1px 0 #C7D663;
+}
+
+
+.br {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:800px) {
+    header {
+        flex-direction: column;
+    }
+    .searchBox {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    .header_text {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .card {
+        width: 200px;
+        height: 220px;
+    }
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
