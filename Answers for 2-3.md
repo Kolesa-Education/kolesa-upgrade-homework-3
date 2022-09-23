@@ -25,15 +25,15 @@ ping - проверка подключения через IP к другому T
 
 curl это инструмент который позволяет передавать и проверять данные через разные сетевые протоколы. curl взаимодействует с сервером приложения указываю УРЛ адрес и данные, которые необходимо отправить или получить. В случае `curl -I https://kolesa.kz/` выводятся заголовки УРЛ без тела: 
 
-HTTP/1.1 200 OK - URL поддерживает протокол HTTP/1.1 и статус сервера 200 = успешный запрос.
-Server: nginx - веб сервер URL-а.
-Date: Fri, 23 Sep 2022 07:09:41 GMT - дата и время по гринвичу совершенного запроса.
-Content-Type: text/html; charset=UTF-8 - тип медиаконтента и тип кодировки.
-Connection: keep-alive - сервер не закрыл соединение после выполнения запроса.
-Set-Cookie: klssid=lpo0gfqd6kglm6ls8qvpqcjs11; expires=Fri, 23-Sep-2022 07:39:41 GMT; Max-Age=1800; path=/; domain=.kolesa.kz; secure; HttpOnly - Set Cookie  устанавливает печеньки у клиента.
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Cache-Control: no-store, no-cache, must-revalidate
-Pragma: no-cache
-Set-Cookie: old_ssid=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; secure
-Set-Cookie: is_returning=0; path=/; secure
-Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    HTTP/1.1 200 OK - URL поддерживает протокол HTTP/1.1 и статус сервера 200 = успешный запрос.
+    Server: nginx - веб сервер URL-а.
+    Date: Fri, 23 Sep 2022 07:09:41 GMT - дата и время по гринвичу совершенного запроса.
+    Content-Type: text/html; charset=UTF-8 - тип медиаконтента и тип кодировки.
+    Connection: keep-alive - сервер не закрыл соединение после выполнения запроса.
+    Set-Cookie: klssid=lpo0gfqd6kglm6ls8qvpqcjs11; expires=Fri, 23-Sep-2022 07:39:41 GMT; Max-Age=1800; path=/; domain=.kolesa.kz; secure; HttpOnly - Set Cookie  устанавливает печеньки у клиента.
+    Expires: Thu, 19 Nov 1981 08:52:00 GMT
+    Cache-Control: no-store, no-cache, must-revalidate
+    Pragma: no-cache
+    Set-Cookie: old_ssid=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; secure
+    Set-Cookie: is_returning=0; path=/; secure
+    Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
