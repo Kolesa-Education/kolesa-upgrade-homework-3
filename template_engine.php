@@ -20,11 +20,19 @@ class TemplateEngine{
         $right_border = strpos($template, "}}");
         while($left_border && $right_border){
             $replaced_str = substr($template, $left_border, $right_border-$left_border+2);
-            $result_value = substr($template, $left_border+3, $right_border-$left_border-3);
-            $template = str_replace($replaced_str, $data[$result_value], $template);
+            $result_value_key = substr($template, $left_border+3, $right_border-$left_border-3);
+            $result_value = $data[$result_value_key] ?? null;
+            if(is_null($result_value))throw new NoTemplateValue("No such parameter in template");
+            $template = str_replace($replaced_str, $result_value, $template);
             $left_border = strpos($template, "{{");
             $right_border = strpos($template, "}}");
         }
         return $template;
     }
+}
+
+
+
+class NoTemplateValue extends Exception{
+
 }
