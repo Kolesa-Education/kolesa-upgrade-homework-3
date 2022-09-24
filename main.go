@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"text/template"
@@ -18,7 +19,7 @@ var Cats []Cat
 type Cat struct {
 	ID     int    `json:"id"`
 	UrlImg string `json:"url"`
-	Width  int    `json:"Width"`
+	Width  int    `json:"width"`
 	Height int    `json:"height"`
 }
 
@@ -45,7 +46,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("template.ParseFiles(\"./static/index.html\")", err)
 		return
 	}
-	err = t.ExecuteTemplate(w, "index", nil)
+	err = t.Execute(w, nil)
 	if err != nil {
 		fmt.Println("t.ExecuteTemplate(w, \"index\", nil)", err)
 		return
@@ -53,10 +54,8 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CatHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		fmt.Println("r.Method != http.MethodPost")
-		return
-	}
+	fmt.Println("cats post", r.URL.Path)
+
 	t, err := template.ParseFiles("./static/index.html")
 	if err != nil {
 		fmt.Println("template doesn't parse in catHandler", err)
@@ -69,14 +68,15 @@ func CatHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	limit := r.PostFormValue("limit")
 	page := r.PostFormValue("page")
-	order := r.PostFormValue("order")
-	requestUrl := URL + "?limit" + limit + "&page" + page + "&order" + order
-	err = GetJson(requestUrl)
+	order := r.PostFormValue("sort")
+	fmt.Println(limit, page, order)
+	// requestUrl := URL + "?limit=" + limit + "&page=" + page + "&order=" + order
+	err = GetJson(URL)
 	if err != nil {
 		fmt.Println("parse Json fail", err)
 		return
 	}
-	err = t.ExecuteTemplate(w, "index", Cats)
+	err = t.Execute(w, Cats)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -84,10 +84,13 @@ func CatHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetJson(url string) error {
+	fmt.Println("url", url)
 	r, err := myClient.Get(url)
 	if err != nil {
 		return err
 	}
+	body, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
+	fmt.Printf("%v\n", string(body))
 	return json.NewDecoder(r.Body).Decode(Cats)
 }
