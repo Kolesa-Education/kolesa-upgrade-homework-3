@@ -1,0 +1,10 @@
+.photoFrame{
+    display: grid;
+    margin-top: 15%;
+    /* grid-template-columns: repeat(auto-fit, minmax(220px, 0fr));  */
+    grid-gap: 150px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+} 
