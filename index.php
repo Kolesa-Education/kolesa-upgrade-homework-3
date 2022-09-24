@@ -34,11 +34,14 @@ class catsGallery{
         } else{
             $addUrl = "v1/images/search";
         }
-
-        $result = $this->client->request("GET", $this->url.$addUrl);
-        $imgUrl = json_decode($result->getBody(), true);
-        foreach ($imgUrl as $img){
-            return $img["url"];
+        try{
+            $result = $this->client->request("GET", $this->url.$addUrl);
+            $imgUrl = json_decode($result->getBody(), true);
+            foreach ($imgUrl as $img){
+                return $img["url"];
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 }
@@ -46,5 +49,4 @@ class catsGallery{
 $objCats = new catsGallery(base_url, $client);
 $objCats->getCategories();
 echo '<html><body><img src= "'. $objCats->getImg() .'" /></body></html>';
-
 ?>
