@@ -14,9 +14,6 @@ import (
 func searchCatByCatId(w http.ResponseWriter, r *http.Request) {
 	client := &http.Client{} //инициализируем клиента
 	//Ввод в консоль значения для запроса
-	fmt.Println("Enter Cat Param: (from 1 to 15) ")
-	var category string
-	fmt.Scanln(&category)
 
 	/*
 		Задаём урл запроса, добавляем ему параметр, выполняем его, и закрываем тело ответа
@@ -27,11 +24,8 @@ func searchCatByCatId(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 		os.Exit(1)
 	}
-
-	q := req.URL.Query()
-	q.Add("category_ids", category)
-	req.URL.RawQuery = q.Encode()
-	fmt.Print(req)
+	q := req.URL.Query().Get("category_ids")
+	fmt.Print(q)
 	res, err := client.Do(req)
 	if err != nil {
 		fmt.Println("Err is", err)

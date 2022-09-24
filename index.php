@@ -13,6 +13,7 @@
 require_once "vendor/autoload.php";
   
 use GuzzleHttp\Client;
+
 try {
 $cat_id = $_GET["category"];
 $client = new Client([
