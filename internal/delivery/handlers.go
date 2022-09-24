@@ -16,43 +16,50 @@ const (
 	catsURL       = "https://api.thecatapi.com/v1/images/search"
 )
 
-func handleMainPage(w http.ResponseWriter, r *http.Request) {
+type Handler struct {
+}
+
+func NewHandler() *Handler {
+	return &Handler{}
+}
+
+func (h *Handler) handleMainPage(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		handleErrorPage(w, http.StatusMethodNotAllowed, nil)
+		h.handleErrorPage(w, http.StatusMethodNotAllowed, nil)
 		return
 	}
 
 	if r.URL.Path != "/" {
 		fmt.Println(r.URL.Path)
-		handleErrorPage(w, http.StatusNotFound, nil)
+		h.handleErrorPage(w, http.StatusNotFound, nil)
 		return
 	}
 
 	var catImg []models.CatImg
 	if err := getDataFromAPI(catsURL, &catImg); err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 		return
 	}
 
 	if len(catImg) < 1 {
-		handleErrorPage(w, http.StatusInternalServerError, errors.New("empty response from the API"))
+		h.handleErrorPage(w, http.StatusInternalServerError, errors.New("empty response from the API"))
 		return
 	}
 
 	tmp, err := template.ParseFiles(templateIndex)
 	if err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 		return
 	}
 
 	if err := tmp.Execute(w, catImg[0]); err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 	}
 }
 
-func handleByCategory(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) handleByCategory(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		handleErrorPage(w, http.StatusMethodNotAllowed, nil)
+		h.handleErrorPage(w, http.StatusMethodNotAllowed, nil)
 		return
 	}
 
@@ -62,23 +69,23 @@ func handleByCategory(w http.ResponseWriter, r *http.Request) {
 
 	var catImg []models.CatImg
 	if err := getDataFromAPI(url, &catImg); err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 		return
 	}
 
 	if len(catImg) < 1 {
-		handleErrorPage(w, http.StatusInternalServerError, errors.New("empty response from the API"))
+		h.handleErrorPage(w, http.StatusInternalServerError, errors.New("empty response from the API"))
 		return
 	}
 
 	tmp, err := template.ParseFiles(templateIndex)
 	if err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 		return
 	}
 
 	if err := tmp.Execute(w, catImg[0]); err != nil {
-		handleErrorPage(w, http.StatusInternalServerError, err)
+		h.handleErrorPage(w, http.StatusInternalServerError, err)
 	}
 }
 
@@ -88,7 +95,7 @@ type errorHTTP struct {
 }
 
 // handleErrorPage is a handler for the error page
-func handleErrorPage(w http.ResponseWriter, status int, serverError error) {
+func (h *Handler) handleErrorPage(w http.ResponseWriter, status int, serverError error) {
 	if status >= http.StatusInternalServerError {
 		log.Printf("something went wrong: %s", serverError)
 	}
