@@ -14,49 +14,53 @@
   ]);
   $category = $_GET['category_ids'] ?? null;
 
-  try {
-    echo  "<h5>Выберите категорию:</h5>";
+  showCategories($client);
+  showCats($client, $category);
 
-    $response = $client->request('GET', '/v1/categories');
-    $statuscode = $response->getStatusCode();
-    $responseBody = $response->getBody();
-    $contents = $responseBody->getContents();
-    $jsonContent = json_decode($contents, true);
-    foreach ($jsonContent as $jsonCategory) {
-      $url = $jsonCategory['name'];
-      echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."?category_ids=" . $jsonCategory['id'] . "'>" . $jsonCategory['name'] . "</a><br>";
+  function showCategories($client)
+  {
+    try {
+      echo  "<h5>Выберите категорию:</h5>";
+
+      $response = $client->request('GET', '/v1/categories');
+      $contents = $response->getBody()->getContents();
+      $jsonContent = json_decode($contents, true);
+      foreach ($jsonContent as $jsonCategory) {
+        echo  "<a href='" . strtok($_SERVER["REQUEST_URI"], '?') . "?category_ids=" . $jsonCategory['id'] . "'>" . $jsonCategory['name'] . "</a><br>";
+      }
+      echo  "<a href='" . strtok($_SERVER["REQUEST_URI"], '?') . "'>random cat</a><br>";
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+      printf("%s %s", $e->getResponse()->getStatusCode(), $e->getResponse()->getReasonPhrase());
+    } catch (GuzzleHttp\Exception\ServerException $e) {
+      printf("Ошибка сервера: %s", $e->getMessage());
+    } catch (\Exception $e) {
+      echo "Ошибка";
     }
-    echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."'>random cat</a><br>";
-  } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo $e->getResponse()->getStatusCode() . " " . $e->getResponse()->getReasonPhrase();
-  } catch (GuzzleHttp\Exception\ServerException $e) {
-    echo "Ошибка сервера";
-  } catch (\Exception $e) {
-    echo "Ошибка";
   }
 
-  try {
-    if (!isset($category)) {
-      $response = $client->request('GET', '/v1/images/search');
-    } else {
-      $response = $client->request('GET', '/v1/images/search?category_ids=' . $category);
+  function showCats($client, $category)
+  {
+    try {
+      if (!isset($category)) {
+        $response = $client->request('GET', '/v1/images/search');
+      } else {
+        $response = $client->request('GET', '/v1/images/search?category_ids=' . $category);
+      }
+
+      $responseBody = $response->getBody();
+      $contents = $responseBody->getContents();
+      $jsonContent = json_decode($contents, true);
+      $url = $jsonContent[0]['url'];
+      echo '<img src=' . $url . ' alt="random_cat" style="max-width:300px; max-height:300px">';
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+      printf("%s %s", $e->getResponse()->getStatusCode(), $e->getResponse()->getReasonPhrase());
+    } catch (GuzzleHttp\Exception\ServerException $e) {
+      printf("Ошибка сервера: %s", $e->getMessage());
+    } catch (\Exception $e) {
+      echo "Ошибка";
     }
-    $statuscode = $response->getStatusCode();
-
-    $responseBody = $response->getBody();
-    $contents = $responseBody->getContents();
-    $jsonContent = json_decode($contents, true);
-    $url = $jsonContent[0]['url'];
-    echo '<img src=' . $url . ' alt="random_cat" style="max-width:300px; max-height:300px">';
-  } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo $e->getResponse()->getStatusCode() . " " . $e->getResponse()->getReasonPhrase();
-  } catch (GuzzleHttp\Exception\ServerException $e) {
-    echo "Ошибка сервера";
-  } catch (\Exception $e) {
-    echo "Ошибка";
   }
-
-
   ?>
+
 </html>
 </body>
