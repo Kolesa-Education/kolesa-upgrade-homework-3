@@ -1,76 +1,112 @@
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>View Cats 4 Free</title>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
-        <title>Sayat</title>
-    </head>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
 
-    <body class="vsc-initialized">
-        <main role="main">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <h1 class="jumbotron-heading">Cats</h1>
-                    <p class="lead text-muted">Милые, красивые, разные котики</p>
-                </div>
-            </section>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/heroes.css" rel="stylesheet">
 
-            <form class="needs-validation" action="index.php" method="POST" novalidate>
-                    <div class="row">
-                        <div class="col-md-3 mb-1"></div>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num1">Количество котиков</label>
-                            <input type="number" class="form-control" name="limit" min="1" max="10">
-                        </div>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num1">Номер страницы</label>
-                            <input type="number" class="form-control" name="page">
-                        </div>
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num2">По:</label>
-                            <select class="form-control" id="exampleFormControlSelect2" name="order">
-                                <option value="Desc">возрастанию</option>
-                                <option value="Asc">убыванию</option>
-                            </select>
-                        </div>
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
 
-                        <div class="col-md-3 mb-1"></div>
-                    </div>
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
 
-                    <div class="row">
-                        <div class="col-md-5 mb-1"></div>
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
 
-                        <button class="btn btn-primary col-md-2 m-1" name="submit" type="submit">Показать</button>
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+    
+  </head>
+<body>
+  <header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <strong>Cat Photos</strong>
+        </a>
+        <a href="https://upgrade.kolesa.group/backend" class="nav-item text-decoration-none text-white">Made on Kolesa Upgrade Backend 2022</a>
+      </div>
+    </div>
+  </header>
 
-                        <div class="col-md-5 mb-1"></div>
-                    </div>
+<main>
 
-                </form>
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="img/logo.svg" alt="" width="120" height="120">
+    <h1 class="display-5 fw-bold">View Cats for Free</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4 mt-4">Without any registration or SMS</p>
+      <p class="lead mb-4">The app made using PHP, Composer & Guzzle.<br>Cheers to Anton Sergeev.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="#cats-album" class="btn btn-primary btn-lg px-4 gap-3">View Cats!</a>
+        <a href="https://github.com/Kolesa-Education/kolesa-upgrade-homework-3" class="btn btn-outline-secondary btn-lg px-4">Go to Repo</a>
+      </div>
+    </div>
+  </div>
 
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div class="row">
+  <div class="album py-5 bg-light" id="cats-album">
+    <div class="container">
+        <div class="row">
 
-                        <?php require 'cat.php'; ?>
+            <?php require_once 'cats.php'; ?>
 
-                    </div>
-                </div>
-            </div>
-        </main>
+        </div>
+    </div>
 
-        <footer class="text-muted">
-            <div class="container">
-                <p class="float-right">
-                    <a href="#">Вверх</a>
-                </p>
-            </div>
-        </footer>
-    </body>
+</main>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
 </html>

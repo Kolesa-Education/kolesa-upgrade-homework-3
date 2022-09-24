@@ -1,0 +1,19 @@
+{
+    "name": "eugenenazirov/kolesa-upgrade-homework-3",
+    "description": "The third homework on the Kolesa Upgrade Backend Dev course",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eugene Nazirov",
+            "email": "jagzonmusic@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}
