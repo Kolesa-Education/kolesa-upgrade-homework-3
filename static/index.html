@@ -1,0 +1,34 @@
+{{define "index"}}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Заголовок страницы</title>
+  </head>
+  <body>
+    <header>
+      <h1>Cats</h1>
+    </header>
+    <div class="search bar">
+        <form method="post" action="/cats" novalidate>
+            <input name="limit" type="number" min="1" max="10" />
+            <input name="page" type="number" min="1" />
+            <select name="sort">
+                <option value="Ask">Ask</option>
+                <option value="Desk">Desk</option>
+                <option value="Random">Random</option>
+            </select>
+            <input type="submit" />
+        </form>
+    </div>
+    <!-- <div class="viewCats">
+        <dl>
+            {{ range $cat = . }}
+            <dd><img src="$cat.Url" width=""></dd>
+        </dl>
+    </div> -->
+  </body>
+</html>
+
+{{ end }}
