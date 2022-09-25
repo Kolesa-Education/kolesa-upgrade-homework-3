@@ -1,0 +1,63 @@
+package web
+
+import (
+	"encoding/json"
+	"html/template"
+	"io/ioutil"
+	"net/http"
+	"time"
+)
+
+const URL = "https://api.thecatapi.com/v1/images/search"
+
+var myClient = &http.Client{Timeout: 5 * time.Second}
+
+type Cat struct {
+	ID     string `json:"id"`
+	UrlImg string `json:"url"`
+	Width  int    `json:"width"`
+	Height int    `json:"height"`
+}
+
+func CatHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+		return
+	}
+	t, err := template.ParseFiles("./static/index.html")
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	err = r.ParseForm()
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	limit := r.PostFormValue("limit")
+	page := r.PostFormValue("page")
+	order := r.PostFormValue("sort")
+	requestUrl := URL + "?limit=" + limit + "&page=" + page + "&order=" + order
+	Cats, err := getJson(requestUrl)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	err = t.Execute(w, Cats)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+}
+
+func getJson(url string) ([]Cat, error) {
+	var Cats []Cat
+	r, err := myClient.Get(url)
+	if err != nil {
+		return Cats, err
+	}
+	body, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	err = json.Unmarshal(body, &Cats)
+	return Cats, err
+}
