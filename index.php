@@ -10,26 +10,20 @@
 
 <body>
 <?php
-
 require __DIR__ . '/vendor/autoload.php';
+include "Cat.php";
 
-
-$url = file_get_contents("https://api.thecatapi.com/v1/images/search");
-
-$curl = curl_init();
-curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($curl, CURLOPT_URL, 'https://api.thecatapi.com/v1/images/search');
-curl_setopt($curl, CURLOPT_REFERER, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-
-
-$parsed = curl_exec($curl);
-curl_close($curl);
-
-$arrayData = json_decode($parsed, true);
-// echo $arrayData[0]['url'];
+$catApi = "https://api.thecatapi.com/v1/images/search";
+$cat = new Cat();
+$index = 0;
+$url = 'url';
+$arrayCats = json_decode($cat->getCat($catApi), true);
+if ($index==0 && $url == 'url') {
+    print_r('<html><body><img src="'.$arrayCats[0]['url'].'"/></body></html>');
+} else {
+    print_r('Not valid key or url');
+}
 ?>
-<img src="<?php echo $arrayData[0]['url']; ?>" alt="Cat" />
 </body>
 
 </html>
