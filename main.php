@@ -16,7 +16,7 @@
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\RequestException;
 
-    $url = file_get_contents("https://api.thecatapi.com/v1/images/search");
+    $url = 'https://api.thecatapi.com/v1/images/search';
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
