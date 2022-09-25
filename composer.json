@@ -1,0 +1,18 @@
+{
+    "name": "hackeevo/project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Hackeevo\\Project\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Omargaly Bitebayev",
+            "email": "hackeevo@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
