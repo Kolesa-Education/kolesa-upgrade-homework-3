@@ -23,22 +23,7 @@
     } catch (Exception $e) {
         echo $e->getMessage();
         die();
-    }
-
-    set_error_handler(function ($err_severity, $err_msg, $err_file, $err_line, array $err_context)
-    {
-        throw new ErrorException( $err_msg, 0, $err_severity, $err_file, $err_line );
-    }, E_WARNING);
-
-    try {
-        $url = 'https://api.thecatapi.com/v1/images/search';
-        $file_content = file_get_contents($url);
-    } catch (Exception $e) {
-        echo 'Error url'; 
-    }
-
-    restore_error_handler();
-
+    }    
     ?>
 
     <?php
@@ -54,10 +39,14 @@
     ]);
 
     $response = $client->get('v1/images/search');
-
-    echo '<pre>';
-    $result = json_decode($response->getBody()->getContents(), true);
-    echo '<img src="' . $result[0]['url'] . '"width="500" height="500"/>';
+    $headers = get_headers('https://api.thecatapi.com/', 1);
+    if ($headers[0] == 'HTTP/1.1 200 OK') {
+        echo '<pre>';
+        $result = json_decode($response->getBody()->getContents(), true);
+        echo '<img src="' . $result[0]['url'] . '"width="500" height="500"/>';
+    } else {
+        echo 'Error';
+    }
     ?>
 
 </body>
