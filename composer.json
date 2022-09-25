@@ -1,0 +1,27 @@
+{
+    "name": "kudaiberdy/kolesa-upgrade-homework-3",
+    "description": "study-project/homework",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kudaiberdy",
+            "email": "kudaiberdy.shagirov@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "slim/slim": "^4.10",
+        "slim/php-view": "^3.2",
+        "php-di/php-di": "*",
+        "slim/psr7": "^1.5"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.1",
+        "squizlabs/php_codesniffer": "^3.7"
+    }
+}
