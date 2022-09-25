@@ -22,24 +22,22 @@ class CatApiClient
             ->request('GET', '/v1/images/search')
             ->getBody(), true);
 
-        return isset($params) ? $params[0]['url'] : 'service is not available';
+        return $params[0]['url'];
     }
 
-    public function getCategoryCatsImg(): array|string
+    public function getCategoryCatsImg(): array
     {
-        $params = json_decode($this->client
+        return json_decode($this->client
             ->request('GET', '/v1/categories')
             ->getBody(), true);
-
-        return $params ?? 'service is not available';
     }
 
-    public function getCatImgByCategory(string $id): array|string
+    public function getCatImgByCategory(string $id): string
     {
         $params = json_decode($this->client
             ->request('GET', "/v1/images/search?category_ids={$id}")
             ->getBody(), true);
 
-        return isset($params) ? $params[0]['url'] : 'service is not available';
+        return $params[0]['url'];
     }
 }

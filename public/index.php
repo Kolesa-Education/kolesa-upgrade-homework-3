@@ -20,9 +20,11 @@ $app = AppFactory::createFromContainer($container);
 $app->addErrorMiddleware(true, true, true);
 
 $app->get('/', function (Request $request, Response $response) {
+    $imgUrl = $this->get('catapi')->getUrlRandCatImg();
+    $categories =$this->get('catapi')->getCategoryCatsImg();
     $params = [
-        'url' => $this->get('catapi')->getUrlRandCatImg(),
-        'categories' => $this->get('catapi')->getCategoryCatsImg()
+        'url' => $imgUrl,
+        'categories' => $categories
     ];
 
     return $this->get('renderer')->render($response, 'index.phtml', $params);
@@ -30,9 +32,11 @@ $app->get('/', function (Request $request, Response $response) {
 
 $app->get('/{categoryId}', function (Request $request, Response $response, array $args) {
     $categoryId = $args['categoryId'];
+    $imgUrl = $this->get('catapi')->getCatImgByCategory($categoryId);
+    $categories = $this->get('catapi')->getCategoryCatsImg();
     $params = [
-        'url' => $this->get('catapi')->getCatImgByCategory($categoryId),
-        'categories' => $categories = $this->get('catapi')->getCategoryCatsImg()
+        'url' => $imgUrl,
+        'categories' => $categories
     ];
 
     return $this->get('renderer')->render($response, 'index.phtml', $params);
