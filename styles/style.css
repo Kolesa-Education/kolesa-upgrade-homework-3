@@ -1,0 +1,33 @@
+html { 
+  background: url(../images/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  background: none;
+  text-align: center;
+  margin-top: 5%;
+}
+
+button {
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+label {
+  color: rgb(220, 220, 220);
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+h1 {
+  color: white;
+}
+
+input.formControl {
+  margin: auto;
+  width: 20%;
+}
