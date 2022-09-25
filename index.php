@@ -1,7 +1,13 @@
 <?php
-require_once "api.php";
+require_once("CatsUrl.php");
+
+$cats = new CatsUrl();
+$catImage = $cats->getCatImage();
+$BreedsArray = $cats->getSearchArray();
+$catsBreeds = $cats->getBreedNames();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +24,13 @@ require_once "api.php";
 </head>
 <body>
     <div class="container">
-        <form class="form" action="category.php?=" method="GET">
+        <form class="form" action="breeds.php" method="GET">
             <h2 class="title">Your daily cats pictures</h2>
-            <select class="select" aria-label="Default select example">
+            <select name="breed" class="select">
     <?php
-        foreach($categJson as $i => $name){
-            $catCategory = $categJson[$i]["name"];
-            print_r($catCategory);
+        foreach($catsBreeds as $catBreed){   
     ?>    
-            <option value="<?=$catCategory?>"><?=$catCategory?></option>
+            <option value="<?=$catBreed?>"><?=$catBreed?></option>
             
     <?php
     }
