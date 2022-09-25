@@ -1,0 +1,6 @@
+{
+    "name": "acer/home-work3_php",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
