@@ -6,8 +6,12 @@
     font-family: 'Inter', sans-serif;
 }
 
+.hidden__text {
+    margin-top: 30%;
+}
+
 .container {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: #FFE2E2;
     display: flex;
@@ -27,6 +31,7 @@
     justify-content: space-around;
     flex-direction: row;
     height: 70vh;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -45,4 +50,8 @@
     text-align: center;
     height: 30vh;
     margin-bottom: 30px;
+}
+
+img {
+    max-height:100%; max-width:100%;
 }
