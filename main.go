@@ -26,20 +26,24 @@ func catsRandom(w http.ResponseWriter, _ *http.Request) {
 	rqst, err := http.NewRequest("GET", "https://api.thecatapi.com/v1/images/search", nil)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	rqst.Header.Set("api_key", apiKey)
 	resp, err := client.Do(rqst)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	var catImgRand []CatImgRand
 	err = json.Unmarshal(body, &catImgRand)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	var imgRand CatImgRand
 	for _, j := range catImgRand {
@@ -53,40 +57,46 @@ func catsRandom(w http.ResponseWriter, _ *http.Request) {
 	err = tmpl.Execute(w, imgRand)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 }
 
-func getCategories(myCategory string) uint {
+func getCategories(myCategory string) int {
 	var category []Category
 	client := &http.Client{}
 	rqst, err := http.NewRequest("GET", "https://api.thecatapi.com/v1/categories", nil)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return -1
 	}
 	rqst.Header.Set("x-api-key", apiKey)
 	rspn, err := client.Do(rqst)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return -1
 	}
 	body, err := ioutil.ReadAll(rspn.Body)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return -1
 	}
 	err = rspn.Body.Close()
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return -1
 	}
 	err = json.Unmarshal(body, &category)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return -1
 	}
 	for _, j := range category {
 		//fmt.Println(j.Name)
 		if j.Name == myCategory {
-			return uint(j.ID)
+			return j.ID
 		}
 	}
-	return -0
+	return -1
 }
 
 func catsBoxes(w http.ResponseWriter, _ *http.Request) {
@@ -96,20 +106,24 @@ func catsBoxes(w http.ResponseWriter, _ *http.Request) {
 	rqst, err := http.NewRequest("GET", ids, nil)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	rqst.Header.Set("api_key", apiKey)
 	resp, err := client.Do(rqst)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	var catImgBoxes []CatImgBoxes
 	err = json.Unmarshal(body, &catImgBoxes)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 	var imgBoxes CatImgBoxes
 	for _, j := range catImgBoxes {
@@ -117,12 +131,13 @@ func catsBoxes(w http.ResponseWriter, _ *http.Request) {
 	}
 	tmpl, err := template.ParseFiles("templates/boxes.html")
 	if err != nil {
-		fmt.Println(w, "Error: ", err)
+		fmt.Println("Error: ", err)
 		return
 	}
 	err = tmpl.Execute(w, imgBoxes)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 }
 
@@ -135,6 +150,7 @@ func ping(w http.ResponseWriter, _ *http.Request) {
 	err = tmpl.Execute(w, nil)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 }
 
@@ -147,6 +163,7 @@ func curl(w http.ResponseWriter, _ *http.Request) {
 	err = tmpl.Execute(w, nil)
 	if err != nil {
 		fmt.Println("Error: ", err)
+		return
 	}
 }
 
