@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="31b7b12a-7b16-4e3d-95f2-219cb20826d0" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectId" id="2FGFZSLMJm6JZCNWnveDe86297o" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/kolesa-upgrade-homework-3/index.php" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Task3" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/kolesa-upgrade-homework-3/index.php">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="31b7b12a-7b16-4e3d-95f2-219cb20826d0" name="Default Changelist" comment="" />
+      <created>1664110568614</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664110568614</updated>
+      <workItem from="1664110569651" duration="1516000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="798" y="198" key="#PHP" timestamp="1664110809800">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="798" y="198" key="#PHP/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1664110809800" />
+    <state x="508" y="224" width="1092" height="766" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1664110793790">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="508" y="224" width="1092" height="766" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1664110793790" />
+    <state x="834" y="343" key="FileChooserDialogImpl" timestamp="1664110780201">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="834" y="343" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1664110780201" />
+    <state x="1110" y="505" key="NewPhpFileDialog" timestamp="1664110995865">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1110" y="505" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1664110995865" />
+  </component>
+</project>
