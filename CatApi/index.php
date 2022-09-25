@@ -15,23 +15,25 @@
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Котики</h1>
-            <p class="lead text-muted">На любой вкус и цвет</p>
+            <p class="lead text-muted">Выбери котика по душе^_^</p>
         </div>
     </section>
 
     <form class="needs-validation" action= "<?= $_SERVER['PHP_SELF'];?>" method="POST" novalidate>
         <div class="row">
-            <div class="col-md-4 mb-1"></div>
+            <div class="col-md-5 mb-1"></div>
+
 
             <div class="col-md-2 mb-1">
-                <label >Количество котиков(1-10)</label>
-                <input type="number" class="form-control" name="num" min="1" max="10">
-            </div>
-
-            <div class="col-md-2 mb-1">
-                <label >Категория котиков</label>
+                <label >Категории котиков</label>
+                <label >1:Простые котики</label>
+                <label >2:Космо котики</label>
+                <label >3:gif котики</label>
+                <label >4:Котики в очках</label>
+                <label >5:Котики в коробке</label>
                 <input type="number" class="form-control" name="cat_category"min="1" max="5">
             </div>
+
 
 
             <div class="col-md-3 mb-1"></div>

@@ -2,21 +2,16 @@
 $autoloadPath = __DIR__ . '/vendor/autoload.php';
 require_once $autoloadPath;
 
+// добавляем библиотеку к себе в проект
 use GuzzleHttp\Client as Client;
 
 class Connect
 {
     private $client;
 
-
-
-
     public function __construct(){
         $this->setConnect();
-
     }
-
-
 
 // Устанавливаем соединение с сайтом 'https://api.thecatapi.com/'
     public function setConnect() {
@@ -29,17 +24,15 @@ class Connect
     }
 
 // Метод который показывает картинки
-    public function getImage($count, $category){
-
-        $response = $this->client->get('v1/images/search?&limit='.$count.'&category_ids='. $category);
+    public function getImage($category){
+        $response = $this->client->get('v1/images/search?category_ids='. $category);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if (!array_key_exists(0, $result)) {
             exit("Произошла ошибка!");
         }
         foreach ($result as $id) {
-//            echo  $id['id'] .' '. $result[0]['url'] . "<br />";
-            echo  $id['id'] . "<br />";
+            echo 'id этого котика = ' . $id['id'] . "<br />";
             echo '<img src="'  . $result[0]['url'] . '">' . "<br />";
         }
     }
@@ -47,12 +40,11 @@ class Connect
 
 // Проверка на нажатие кнопки, проверка на корректность отправленных данных и если все ок то запуск поиска картинок
 if (isset($_POST['submit'])) {
-    $num = $_POST['num'];
     $cat_category = $_POST['cat_category'];
-    if (is_numeric($num) && is_numeric($cat_category)) {
+
+    if (is_numeric($cat_category)) {
         $obj = new Connect();
-        $obj->getImage($num, $cat_category);
-        $obj->count = $num;
+        $obj->getImage($cat_category);
         $obj->category = $cat_category;
     } else {
         exit("Введены неверные данные!");
