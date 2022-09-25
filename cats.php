@@ -18,7 +18,7 @@ try {
     exit("Picture not found!");
 }
     $bodyArray = json_decode($response->getBody());
-    if ($bodyArray === null) {
+    if (!array_key_exists(0, $bodyArray)) {
         exit("Invalid JSON");
     }
     $stdObj = $bodyArray[0];
