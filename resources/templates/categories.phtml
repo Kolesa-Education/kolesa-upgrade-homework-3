@@ -1,6 +1,10 @@
 <ul>
-    <li><a href="/">Random cats</a></li>
-    <?php foreach ($categories as $category): ?>
-        <li><a href="/<?= htmlspecialchars($category['id'])?>"><?= htmlspecialchars($category['name'])?></a></li>
-    <?php endforeach ?>
+    <?php if (empty($categories)): ?>
+        <p>Sorry, but there is no cat category to be found right now</p>
+    <?php else: ?>
+        <li><a href="/">Random cats</a></li>
+        <?php foreach ($categories as $category): ?>
+            <li><a href="/<?= htmlspecialchars($category['id'])?>"><?= htmlspecialchars($category['name'])?></a></li>
+        <?php endforeach ?>
+    <?php endif ?>
 </ul>

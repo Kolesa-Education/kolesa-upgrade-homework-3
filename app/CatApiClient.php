@@ -16,28 +16,41 @@ class CatApiClient
         ]);
     }
 
-    public function getUrlRandCatImg(): string
+    public function getURLRandImage(): string
     {
-        $params = json_decode($this->client
-            ->request('GET', '/v1/images/search')
-            ->getBody(), true);
 
-        return $params[0]['url'];
+        try {
+            $params = json_decode($this->client
+                ->request('GET', '/v1/images/search')
+                ->getBody(), true);
+        } catch (\Exception) {
+            return '';
+        }
+
+        return $params[0]['url'] ?? '';
     }
 
-    public function getCategoryCatsImg(): array
+    public function getImageCategories(): array
     {
-        return json_decode($this->client
-            ->request('GET', '/v1/categories')
-            ->getBody(), true);
+        try {
+            return json_decode($this->client
+                ->request('GET', '/v1/categories')
+                ->getBody(), true);
+        } catch (\Exception) {
+            return [];
+        }
     }
 
-    public function getCatImgByCategory(string $id): string
+    public function getURLImageByCategory(string $categoryID): string
     {
-        $params = json_decode($this->client
-            ->request('GET', "/v1/images/search?category_ids={$id}")
-            ->getBody(), true);
+        try {
+            $params = json_decode($this->client
+                ->request('GET', "/v1/images/search?category_ids={$categoryID}")
+                ->getBody(), true);
+        } catch (\Exception) {
+            return '';
+        }
 
-        return $params[0]['url'];
+        return $params[0]['url'] ?? '';
     }
 }

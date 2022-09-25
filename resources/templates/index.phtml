@@ -4,12 +4,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Cat's images</title>
 </head>
 <body>
     <? require_once 'categories.phtml'?>
+    <?php if (empty($url)): ?>
+        <p>Sorry, but there is no cat image to be found right now</p>
+    <?php endif ?>
     <div>
-        <a href=""/<?= htmlspecialchars($category['id'])?>"">
+        <a href=""/<?= htmlspecialchars($categoryID)?>"">
             <img src="<?= htmlspecialchars($url)?>" alt="">
         </a>
     </div>
