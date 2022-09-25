@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -14,7 +13,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("./ui/index.html")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Cannot access files to create template")
 	}
 
 	resp, err := http.Get("https://api.thecatapi.com/v1/images/search/")
@@ -25,11 +24,10 @@ func home(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Invalid Response - Server Problem")
+
 	}
 
 	json.Unmarshal(body, &responseList)
-	fmt.Println(responseList)
-
 	tmpl.Execute(w, responseList)
 }
