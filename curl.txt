@@ -1,0 +1,51 @@
+
+curl - это утилита командной строки для Linux или Windows с набором библиотек, 
+в которых реализуются базовые возможности работы с URL страницами и передачи файлов. 
+Библиотека поддерживает работу с протоколами: FTP, FTPS, HTTP, HTTPS, SCP итд. 
+С curl можно имитировать действия пользователя на страницах и другие операции с URL адресами.
+
+ -i, --include              Include protocol response headers in the output
+ `HTTP/2 200`               curl supports HTTP/2 for both HTTP:// and HTTPS:// URLs returns with status code
+ `server: nginx`            server name
+
+curl -I https://kolesa.kz/ выдал результат:
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 25 Sep 2022 16:50:15 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Set-Cookie: klssid=gvtp0er8vtg1skutplgc7srtom; expires=Sun, 25-Sep-2022 17:20:15 GMT; Max-Age=1800; path=/; domain=.kolesa.kz; secure; HttpOnly
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: old_ssid=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; secure
+Set-Cookie: is_returning=0; path=/; secure
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+
+
+ping - это утилита для диагностики сети. 
+Она позволяет проверить доступен удаленный хост или нет и все. 
+Для этого утилита проверяет, может ли хост отвечать на сетевые запросы с помощью протокола ICMP.
+Протокол ICMP может передавать только два типа пакетов - это сообщения с отчетами про ошибки и сообщения запросов: 
+Сообщение эхо-запрос;
+Сообщение эхо-ответ.
+
+ping google.com
+
+Обмен пакетами с google.com [74.125.205.100] с 32 байтами данных:
+Ответ от 74.125.205.100: число байт=32 время=74мс TTL=109
+Ответ от 74.125.205.100: число байт=32 время=74мс TTL=109
+Ответ от 74.125.205.100: число байт=32 время=90мс TTL=109
+Ответ от 74.125.205.100: число байт=32 время=74мс TTL=109
+
+Статистика Ping для 74.125.205.100:
+    Пакетов: отправлено = 4, получено = 4, потеряно = 0
+    (0% потерь)
+Приблизительное время приема-передачи в мс:
+    Минимальное = 74мсек, Максимальное = 90 мсек, Среднее = 78 мсек
+
+"64 bytes from 142.250.186.206" — IP адрес Google Cloud    
+"icmp_seq=0" — номер пакета
+"ttl=113" — время жизни пакета
+"time=123 ms" — время, затраченное на ожидание ответа

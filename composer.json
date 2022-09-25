@@ -1,0 +1,12 @@
+{
+    "name": "a.toktassynova/kolesa-upgrade-homework-3",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
