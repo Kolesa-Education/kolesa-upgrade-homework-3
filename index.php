@@ -22,25 +22,22 @@ try {
     echo  "<h5>Выберите категорию:</h5>";
 
     $response = $client->request('GET', '/v1/categories');
-    $statuscode = $response->getStatusCode();
-    $responseBody = $response->getBody();
-    $contents = $responseBody->getContents();
+    $contents = $response->getBody()->getContents();
     $jsonContent = json_decode($contents, true);
 
-    //echo json_encode($jsonContent);
-
     foreach ($jsonContent as $jsonCategory) {
-        $url = $jsonCategory['name'];
-        echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."?category_ids=" . $jsonCategory['id'] . "'>" . $jsonCategory['name'] . "</a><br>";
+        echo  "<a href='/index.php?category_ids=" . $jsonCategory['id'] . "'>" . $jsonCategory['name'] . "</a><br>";
     }
-    echo  "<a href='".strtok($_SERVER["REQUEST_URI"], '?')."'>random cat</a><br>";
+    echo  "<a href='/index.php"."'>random cat</a><br>";
 } catch (GuzzleHttp\Exception\ClientException $e) {
     echo $e->getResponse()->getStatusCode() . " " . $e->getResponse()->getReasonPhrase();
 } catch (GuzzleHttp\Exception\ServerException $e) {
-    echo "Ошибка сервера";
+    printf("Ошибка сервера: %s", $e->getMessage());
 } catch (\Exception $e) {
     echo "Ошибка";
 }
+
+$category = $_GET['category_ids']??null;
 
 try {
     if (!isset($category)) {
@@ -50,9 +47,7 @@ try {
         $response = $client->request('GET', '/v1/images/search?category_ids=' . $category);
     }
 
-    $statuscode = $response->getStatusCode();
-    $responseBody = $response->getBody();
-    $contents = $responseBody->getContents();
+    $contents = $response->getBody()->getContents();
     $jsonContent = json_decode($contents, true);
     $url = $jsonContent[0]['url'];
 
@@ -61,7 +56,7 @@ try {
 } catch (GuzzleHttp\Exception\ClientException $e) {
     echo $e->getResponse()->getStatusCode() . " " . $e->getResponse()->getReasonPhrase();
 } catch (GuzzleHttp\Exception\ServerException $e) {
-    echo "Ошибка сервера";
+    printf("Ошибка сервера: %s", $e->getMessage());
 } catch (\Exception $e) {
     echo "Ошибка";
 }
