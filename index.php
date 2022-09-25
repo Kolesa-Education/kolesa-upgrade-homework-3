@@ -16,10 +16,13 @@ $url = $getUrlFromArray->url;
 //print_r($url);
 
 echo <<<HTML
-<html><body>
+<html>
+    <body>
     <h1>Cat homework</h1>
     <br>
-    <p><img src=$url alt="тут должен быть кот"></body></html></p>
+    <p><img src=$url alt="тут должен быть кот"></p>
+    </body>
+</html>
 HTML;
 
 ?>
