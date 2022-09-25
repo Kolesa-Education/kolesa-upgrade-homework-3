@@ -1,0 +1,17 @@
+{
+    "name": "first/untitled1",
+    "autoload": {
+        "psr-4": {
+            "First\\Untitled1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arman Kinash",
+            "email": "88040029+sawqqer@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
