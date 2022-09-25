@@ -1,0 +1,13 @@
+{
+    "name": "vendor/guzzle",
+    "description": "guzzle lib download",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Guzzle\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}

@@ -1,76 +1,77 @@
+
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
-        <title>Sayat</title>
-    </head>
+<style>
 
-    <body class="vsc-initialized">
-        <main role="main">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <h1 class="jumbotron-heading">Cats</h1>
-                    <p class="lead text-muted">Милые, красивые, разные котики</p>
-                </div>
-            </section>
+    .layout {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        flex-wrap: wrap;
 
-            <form class="needs-validation" action="index.php" method="POST" novalidate>
-                    <div class="row">
-                        <div class="col-md-3 mb-1"></div>
+        justify-content: space-around;
+    }
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num1">Количество котиков</label>
-                            <input type="number" class="form-control" name="limit" min="1" max="10">
-                        </div>
+    .grow1 {
+        flex-grow: 1;
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num1">Номер страницы</label>
-                            <input type="number" class="form-control" name="page">
-                        </div>
+    }
 
-                        <div class="col-md-2 mb-1">
-                            <label for="num2">По:</label>
-                            <select class="form-control" id="exampleFormControlSelect2" name="order">
-                                <option value="Desc">возрастанию</option>
-                                <option value="Asc">убыванию</option>
-                            </select>
-                        </div>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-                        <div class="col-md-3 mb-1"></div>
-                    </div>
+</style>
 
-                    <div class="row">
-                        <div class="col-md-5 mb-1"></div>
+<body>
 
-                        <button class="btn btn-primary col-md-2 m-1" name="submit" type="submit">Показать</button>
+<?php
 
-                        <div class="col-md-5 mb-1"></div>
-                    </div>
+    require_once 'vendor/autoload.php';
 
-                </form>
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Exception\GuzzleException;
 
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div class="row">
+?>
 
-                        <?php require 'cat.php'; ?>
+<section class="layout">
 
-                    </div>
-                </div>
+    <h1 style="align-content: center; display: block; margin-left: auto; margin-right: auto;">Five random cats)</h1>
+    
+    <?php for ($i = 0; $i < 5; $i++) : ?>
+
+        <?php
+
+        $client = new Client([
+            'base_uri' => 'https://api.thecatapi.com',
+            'timeout'  => 2.0,
+        ]);
+
+        try {
+
+            $response = $client->get('v1/images/search');
+            $body = $response->getBody();
+            $remainingBytes = $body->getContents();
+            $cats = json_decode($remainingBytes);
+
+        } catch (GuzzleException $e) {
+
+            echo "An error from sending a request to thecatapi!";
+
+        }
+
+        ?>
+
+            <div class="grow1" >
+
+                <img class="img" src="<?php echo $cats[0]->url?>" width="100" height="100" alt="">
+
             </div>
-        </main>
+    
+    <?php endfor ?>
 
-        <footer class="text-muted">
-            <div class="container">
-                <p class="float-right">
-                    <a href="#">Вверх</a>
-                </p>
-            </div>
-        </footer>
-    </body>
+</section>
+</body>
 </html>
