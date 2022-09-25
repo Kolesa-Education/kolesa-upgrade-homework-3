@@ -38,7 +38,7 @@ class catImage{
     
     public function getImage()
     {
-        $category = $_GET['category_ids']??null;
+        $category = $_GET['category_ids'] ?? null;
         try {
             if (!isset($category)) {
                 $response = $this->client->request('GET', '/v1/images/search');
