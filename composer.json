@@ -1,0 +1,9 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+      "ext-json": "*",
+        "php-http/httplug-bundle": "^1.27",
+        "php-http/curl-client": "^2.2",
+      "ext-curl": "*"
+    }
+}
