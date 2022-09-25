@@ -10,13 +10,13 @@ $client = new Client([
 ]);
 
 function getCatUrl($client) {
-try {
-    $response = $client->get('search');   
-} catch (GuzzleHttp\Exception\ClientException $e) {
-    $response = $e->getResponse();
-    // return "Picture not found!";
-    exit("Picture not found!");
-}
+    try {
+        $response = $client->get('search');   
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+        $response = $e->getResponse();
+        // return "Picture not found!";
+        exit("Picture not found!");
+    }
     $bodyArray = json_decode($response->getBody());
     if (!array_key_exists(0, $bodyArray)) {
         exit("Invalid JSON");
