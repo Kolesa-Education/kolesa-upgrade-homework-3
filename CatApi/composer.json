@@ -1,0 +1,19 @@
+{
+    "name": "user/cat-api",
+    "description": "Other commit",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "User\\CatApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ruslan",
+            "email": "cmailik7777@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "7.5"
+    }
+}
