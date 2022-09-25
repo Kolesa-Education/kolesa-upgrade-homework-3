@@ -1,38 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cats never sad</title>
-</head>
-<body>
-    <?php
-    
-    class ConfigFileNotFoundException extends Exception {}
+<?php
 
-    try {
-        $config_file_path = "index.php";
-        if (!file_exists($config_file_path))
-        {
-            throw new ConfigFileNotFoundException("Configuration file not found.");
+require_once ('vendor/autoload.php');
+
+use GuzzleHttp\Client; 
+
+const base_url = "https://api.thecatapi.com/";
+
+$client = new GuzzleHttp\Client(['verify' => false]);
+
+class Cats{
+    private $url;
+    private $client;
+
+    public function __construct($url, $client)
+    {
+        $this->url=$url;
+        $this->client=$client;
+    }
+
+    function getCategories()
+    {
+        $response = $this->client->request("GET", $this->url."v1/categories");
+        $categoriesApi = json_decode($response->getBody(), true);
+        asort($categoriesApi);
+        foreach($categoriesApi as $category){
+            echo $category["id"]." ".$category["name"]."<br>\n";
         }
-    } catch (ConfigFileNotFoundException $e) {
-        echo "ConfigFileNotFoundException: ".$e->getMessage();
-        die();
-    } catch (Exception $e) {
-        echo $e->getMessage();
-        die();
-    }    
-    ?>
+    }
 
-    <?php
-        require "src/CatApi.php";
-        
-        $client = new CatApi();
+    function displayImg()
+    {
+        $category = $_GET['category_ids'] ?? null;
+        if (isset($category)){
+            $catApi = "v1/images/search?category_ids=$category";
+        } else{
+            $catApi = "v1/images/search";
+        }
 
-        $client->getCatApi();    
-    ?>
+        $result = $this->client->request("GET", $this->url.$catApi);
+        $imgApi = json_decode($result->getBody(), true);
+        foreach ($imgApi as $img){
+            return $img["url"];
+        }
+    }
+}
 
-</body>
-</html>
+$objCats = new Cats(base_url,$client);
+$objCats->getCategories();
+echo '<html><body><img src= "'. $objCats->displayImg() .'" /></body></html>';
