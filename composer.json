@@ -1,0 +1,12 @@
+{
+    "name": "zhanarys/project-cat",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Zhanarys\\ProjectCat\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
