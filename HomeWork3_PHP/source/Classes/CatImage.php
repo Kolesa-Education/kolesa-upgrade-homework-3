@@ -5,62 +5,75 @@
   class CatImage implements IImage{
 
 
-    protected string $m_id="";
-    protected string $m_url="";
-    protected float $m_width=0.0;
-    protected float $m_height=0.0;
+    protected string $mId="";
+    protected string $mUrl="";
+    protected float $mWidth=0.0;
+    protected float $mHeight=0.0;
+    protected  $mCategory;
 
-    public function __construct($id,$url,$width,$height){
-      $this->m_id=$id;
-      $this->m_url=$url;
-      $this->m_width=$width;
-      $this->m_height=$height;
+    public function __construct(int $id,string $url, float $width,float $height,  $category){
+      $this->mId=$id;
+      $this->mUrl=$url;
+      $this->mWidth=$width;
+      $this->mHeight=$height;
+      $this->mCategory=$category;
     }
+
+    public function getCategory(){
+        return $this->mCategory;
+    }
+    public function setCategory($category){
+        $this->mCategory=$category;
+    }
+
 
     public function getId():string{
-      return $this->m_id;
+      return $this->mId;
     }
     public function setId(string $id){
-      $this->m_id=$id;
+      $this->mId=$id;
     }
 
     public function getUrl():string{
-      return $this->m_url;
+      return $this->mUrl;
 
     }
     public function setUrl(string $url){
-        $this->m_url=$url;
+        $this->mUrl=$url;
     }
 
     public function getWidth():float{
-      return $this->m_width;
+      return $this->mWidth;
     }
     public function setWidth(float $width){
-      $this->m_width=$width;
+      $this->mWidth=$width;
     }
 
     public function getHeight():float{
-      return $this->m_height;
+      return $this->mHeight;
     }
     public function setHeight(float $height){
-      $this->m_height=$height;
+      $this->mHeight=$height;
     }
 
-    public function setCat(string $id,float $height, float $width, string $url){
+    public function setCat(string $id,float $height, float $width, string $url, $category){
       $this->setHeight($height);
       $this->setWidth($width);
       $this->setUrl($url);
       $this->setId($id);
+      $this->setCategory($category);
     }
 
     public function printImage(){
       $url=$this->getUrl();
       $height=$this->getHeight();
       $width=$this->getWidth();
+      $category= $this->getCategory();
 
-
-      echo ("<img src='$url' height='$height' width='$width'/>");
+      echo ("<h2>Категория: $category->name </h2><img src='$url' height='$height' width='$width'/>");
     }
+
+
 
 
 

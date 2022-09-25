@@ -6,9 +6,7 @@ if (isset($_POST['CategoryID'])) {
 	$CategoryID = $_POST['CategoryID'];
 	$control = new ControlCatApi("https://api.thecatapi.com/v1/");
 
-	$control->setRandomCatByCategory($CategoryID);
-	$control->printCat();
-
+	$control->printRandomCatByCategory($CategoryID);
 
 }
 else {
