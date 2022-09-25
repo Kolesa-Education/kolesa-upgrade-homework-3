@@ -1,22 +1,15 @@
 <?php 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, "https://api.thecatapi.com/v1/categories");
-    
-    $categories = curl_exec($ch);
+    require "Client.php";
 
-    curl_close($ch);
+    $client = new Client();
 
-    $categories = json_decode($categories);
-    
+    $categories = $client->getCategories();
+
     if($categories == NULL){
         die("Some error occured");
     }
-
-    if(isset($categories->message)){
-        die("Some error occured");
-    }
 ?>
+
 <!DOCTYPE html>
 <head>
     <title>Cats by categories</title>
@@ -27,7 +20,7 @@
             foreach($categories as $category){
         ?>
             <label for="<?php echo $category->id ?>"><?php echo $category->name; ?></label>
-            <input type="radio" name="categories[]" id = "<?php echo $category->id ?>" value="<?php echo $category->id; ?>"><br>
+            <input type="radio" name="category" id = "<?php echo $category->id ?>" value="<?php echo $category->id; ?>"><br>
         <?php
             }
         ?>

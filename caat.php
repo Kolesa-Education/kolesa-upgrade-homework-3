@@ -1,29 +1,27 @@
 <?php
+  require "Client.php";
+  
+  $client = new Client();
+
   $data = $_GET;
-  // var_dump($data);
-    $api = "https://api.thecatapi.com/v1/images/search";
-    if(isset($data['categories'])){
-      $api .= "?category_ids=";
-      $api .= $data['categories'][0];
-    }
+  if(isset($data['category'])){
+    $result = $client->getCatByCategory($data['category']);
+  } else {
+    $result = $client->getRandomCat();
+  }
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, $api);
-
-    $result = curl_exec($ch);
-
-    curl_close($ch);
-    $result = json_decode($result);
-    // var_dump($api);
+  
+  if($result == NULL){
+    die("Some error occured");
+  }
     
-    if($result == NULL){
-      die("Some error occured");
-    }
 ?>
 
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>CAAATS</title>
+  </head>
   <body>
     <img width="<?php echo $result[0]->width; ?>" height="<?php echo $result[0]->height; ?>" src="<?php echo $result[0]->url; ?>"/>
   </body>
