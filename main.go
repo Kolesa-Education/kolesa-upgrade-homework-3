@@ -14,10 +14,8 @@ const URL = "https://api.thecatapi.com/v1/images/search"
 
 var myClient = &http.Client{Timeout: 5 * time.Second}
 
-var Cats []Cat
-
 type Cat struct {
-	ID     int    `json:"id"`
+	ID     string `json:"id"`
 	UrlImg string `json:"url"`
 	Width  int    `json:"width"`
 	Height int    `json:"height"`
@@ -70,8 +68,8 @@ func CatHandler(w http.ResponseWriter, r *http.Request) {
 	page := r.PostFormValue("page")
 	order := r.PostFormValue("sort")
 	fmt.Println(limit, page, order)
-	// requestUrl := URL + "?limit=" + limit + "&page=" + page + "&order=" + order
-	err = GetJson(URL)
+	requestUrl := URL + "?limit=" + limit + "&page=" + page + "&order=" + order
+	Cats, err := GetJson(requestUrl)
 	if err != nil {
 		fmt.Println("parse Json fail", err)
 		return
@@ -83,14 +81,16 @@ func CatHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetJson(url string) error {
+func GetJson(url string) ([]Cat, error) {
 	fmt.Println("url", url)
 	r, err := myClient.Get(url)
+	var Cats []Cat
 	if err != nil {
-		return err
+		return Cats, err
 	}
 	body, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	fmt.Printf("%v\n", string(body))
-	return json.NewDecoder(r.Body).Decode(Cats)
+	err = json.Unmarshal(body, &Cats)
+	return Cats, err
 }
