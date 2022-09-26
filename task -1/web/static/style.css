@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    width: 500px;
+    height: 611px;
+    margin: 0 auto;
+    margin-top: 200px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(92,99,105,.2);
+}
+
+.img_item{
+    width: 500px;
+    height: 500px;
+    object-fit:cover;
+    border-radius: 10px;
+}
+
+.btn{
+    display: inline-block;  
+    text-decoration: none;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 15px;
+}
+
+.cat {
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+}
+
+.title_error{
+    margin: 350px;
+    text-align: center;
+}
