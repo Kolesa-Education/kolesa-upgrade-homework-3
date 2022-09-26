@@ -13,7 +13,12 @@ $response = $httpClient->request('GET');
 $contents = $response->getBody();
 $jsonContent = json_decode($contents, true);
 //var_dump($jsonContent);
-$url = $jsonContent[0]['url'];
+
+if (isset($jsonContent[0]['url'])) {
+    $url = $jsonContent[0]['url'];
+} else {
+    echo "Сервер недоступен, попробуйте перезагрузить страницу.";
+}
 
 ?>
 
