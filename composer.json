@@ -1,0 +1,12 @@
+{
+    "name": "tomi1701/api",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
