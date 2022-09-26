@@ -1,54 +1,61 @@
 <?php
-
-class Fetch
+class Cat
 {
+    protected $fetchBreeds;
+    protected $getBreed;
 
-    public $fetched;
-    public $error;
-
-    public function __construct($url)
+    public function __construct($fetchBreeds, $getBreed)
     {
-        if (strlen($url) > 10) {
-            if ($fetch = @file_get_contents($url)) {
-                $toJson = json_decode($fetch, true);
-                $toJson = $toJson[0];
-                $this->fetched = $toJson;
-                return $toJson;
-            } else {
-                $this->error = 'Запрос по сайту данные не найдены';
+        $this->setFetchBreeds($fetchBreeds);
+        $this->getBreed = $getBreed;
+    }
+    /**
+     * @param mixed $fetchBreeds
+     */
+    public function setFetchBreeds($fetchBreeds)
+    {
+        $this->fetchBreeds = json_decode(file_get_contents($fetchBreeds), true);
+    }
+
+    public function eachIMG(){
+        for ($i = 0; $i < count($this->fetchBreeds); $i++) {
+            if ($this->fetchBreeds[$i]['name'] == $this->getBreed) {
+                return '<img width="400px" height="auto" src="'.$this->fetchBreeds[$i]['image']['url'].'">';
             }
-        } else {
-            $this->error = 'Неправильный адрес';
         }
+        return null;
     }
 
-    public function render()
+    public function eachId()
     {
-        if (!$this->error) {
-            return "<img width='" . $this->fetched['width'] . "' height='" . $this->fetched['height'] . "' src='" . $this->fetched['url'] . "'>";
-        } else {
-            return $this->error;
+        for ($i = 0; $i < count($this->fetchBreeds); $i++) {
+            echo '<option value="'.$this->fetchBreeds[$i]['name'].'">'.$this->fetchBreeds[$i]['name'].'</oprion>';
         }
     }
-
 }
+?>
 
-$fetch = new Fetch('https://api.thecatapi.com/v1/images/search');
-echo $fetch->render();
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Это заголовок тайтл</title>
+</head>
+<body>
+<form action="" method="get">
+    <?php
 
-// Вопрос - Объясните своими словами, для чего нужна эта утилита. Опишите подробно, что выводит команда ping google.com.
-// Ответ - Ping - нужна для проверки подключения к другому компьютеру на уровне ip.Команда ping <ip> отправляет серию пакетов на указанную ip и выдает на время ответа.
+    $cat = new Cat('https://api.thecatapi.com/v1/breeds/', isset($_GET['paroda']) ? $_GET['paroda'] : null);
 
-// Вопрос - В частности, напишите, что означают строчки "64 bytes from 142.250.186.206", "icmp_seq=0", "ttl=113", "time=123 ms". Расскажите, что выводит программа при завершении работы (после нажатия ctrl+c).
-// Ответ - 64 bytes - вес пакетов,
-// from 142.250.186.206 - адресс для обмена данных,
-// icmp_seq=0 - предназначен для отправки контрольных и тестовых сообщений по IP-сетям, а 0 это тип соббщений 0 = Эхо-ответ.
-// ttl=113 - это кол-во промежуточных устройст который он проходит дальше он теряется.
-// time=123 ms - затраченное время в миллисекундах для формулировки пакета.
-// При нажатии нажатия ctrl+c во время работы команды ping - операция прерывается и сразу выводится информация с уже сформулированными пакетами.
+    if (isset($_GET['submit'])) {
+        echo $cat->eachIMG();
+    }
+    ?>
+    <select name="paroda" id="paroda">
+        <option value="change">change</option>
+        <?php $cat->eachId(); ?>
+    </select>
+    <button type="submit" name="submit" value="submit">Submit</button>
 
-// Вопрос - Объясните своими словами, для чего нужна эта утилита. Опишите подробно, что выводит команда curl -I https://kolesa.kz/
-// Ответ - Выдодит заголовки HTTP без тело.
-// Вопрос - В частности, напишите, что означают строки "HTTP/2 200", "server: nginx" и другие. Что означает флаг "-I"? (Если вы работаете на windows, то сначала нужно будет установить curl; инструкции есть в интернете).
-// Ответ -  HTTP/2 200 - первый протокол, второе это код запроса означающий успех). server: nginx - Это программное обеспечения сервера. Флаг -I - Выдодит заголовки HTTP без тело.
+</form>
 
+</body>
