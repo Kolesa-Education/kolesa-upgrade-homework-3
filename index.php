@@ -29,6 +29,7 @@
 
 <?php
 
+    require_once 'cat.php';
     require_once 'vendor/autoload.php';
 
     use GuzzleHttp\Client;
@@ -54,7 +55,7 @@
             $response = $client->get('v1/images/search');
             $body = $response->getBody();
             $remainingBytes = $body->getContents();
-            $cats = json_decode($remainingBytes);
+            $cat = json_decode($remainingBytes);
 
         } catch (GuzzleException $e) {
 
@@ -62,13 +63,11 @@
 
         }
 
+        $cat_obj = new Cat();
+        $cat_obj->setParams($cat);
+        $cat_obj->displayCat();
+
         ?>
-
-            <div class="grow1" >
-
-                <img class="img" src="<?php echo $cats[0]->url?>" width="100" height="100" alt="">
-
-            </div>
     
     <?php endfor ?>
 
