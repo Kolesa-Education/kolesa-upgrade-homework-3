@@ -17,7 +17,9 @@ func GetJson() ([]models.Image, error) {
 	}
 	defer response.Body.Close()
 
-	json.NewDecoder(response.Body).Decode(&data)
+	if err := json.NewDecoder(response.Body).Decode(&data); err != nil {
+		return nil, err
+	}
 
 	return data, nil
 }
