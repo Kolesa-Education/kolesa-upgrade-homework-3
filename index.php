@@ -12,11 +12,6 @@
         justify-content: space-around;
     }
 
-    .grow1 {
-        flex-grow: 1;
-
-    }
-
     img {
         display: block;
         margin-left: auto;
@@ -35,20 +30,20 @@
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\GuzzleException;
 
+    $client = new Client([
+        'base_uri' => 'https://api.thecatapi.com',
+        'timeout'  => 2.0,
+    ]);
+
 ?>
 
 <section class="layout">
 
-    <h1 style="align-content: center; display: block; margin-left: auto; margin-right: auto;">Five random cats)</h1>
+    <h1 style="align-content: center; display: block; margin-left: auto; margin-right: auto;">Five random images with cats)</h1>
     
     <?php for ($i = 0; $i < 5; $i++) : ?>
 
         <?php
-
-        $client = new Client([
-            'base_uri' => 'https://api.thecatapi.com',
-            'timeout'  => 2.0,
-        ]);
 
         try {
 
@@ -56,16 +51,14 @@
             $body = $response->getBody();
             $remainingBytes = $body->getContents();
             $cat = json_decode($remainingBytes);
+            $cat_obj = new Cat($cat);
+            $cat_obj->displayCat();
 
         } catch (GuzzleException $e) {
 
             echo "An error from sending a request to thecatapi!";
 
         }
-
-        $cat_obj = new Cat();
-        $cat_obj->setParams($cat);
-        $cat_obj->displayCat();
 
         ?>
     
