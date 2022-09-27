@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cats</title>
+    <style>
+        header{
+            text-align: center;
+        }
+        .search-bar{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        .search-bar #submit-Button{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Cats</h1>
+</header>
+<div class="search-bar">
+    <form method="post" action="/Cats" novalidate>
+        <br>
+        <input id="submit-Button" type="submit" value="submit"/>
+        <br>
+    </form>
+</div>
+<div class="viewCats">
+    <dl>
+        {{ range . }}
+        <dd><img src="{{.UrlImg}}" width="{{.Width}}" height="{{.Height}}"></dd>
+        <br>
+        {{ end }}
+    </dl>
+</div>
+</body>
+</html>
