@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <form id="category" method="GET">
+        <select class="custom-select" name="category">
+          <option value="all" selected>All</option>
+          <option value="hats">Hats</option>
+          <option value="space">space</option>
+          <option value="funny">funny</option>
+          <option value="sunglasses">sunglasses</option>
+          <option value="boxes">boxes</option>
+          <option value="caturday">caturday</option>
+          <option value="ties">ties</option>
+          <option value="dream">dream</option>
+          <option value="ties">ties</option>
+          <option value="kittens">kittens</option>
+          <option value="sinks">sinks</option>
+          <option value="clothes">clothes</option>
+        </select>
+        <button type="submit" class="custom-button">Submit</button>
+      </form>
+    </div>
+    <div id="container" class="container"></div>
+  </body>
+
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const category = urlParams.get("category");
+
+    async function getData() {
+      const response = await fetch(
+        `http://localhost:8080?category=${category}`
+      );
+      const body = await response.json();
+      console.log(body);
+      return body;
+    }
+
+    function renderImages(src) {
+      const image = document.createElement("img");
+      image.src = src;
+      image.className = "image";
+      return image;
+    }
+
+    async function getCats() {
+      let images = await getData();
+      images = images.map((image) => renderImages(image.url));
+      console.log(images);
+      let container = document.getElementById("container");
+      images.forEach((element) => {
+        container.appendChild(element);
+      });
+    }
+
+    getCats();
+  </script>
+
+  <style>
+    .form-container {
+      padding: 20px 0px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .container img {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .custom-select {
+      border: none;
+      font-size: 20px;
+      padding: 10px 15px;
+      background-color: dodgerblue;
+      color: white;
+    }
+
+    .custom-select option {
+      padding: 5px 0px;
+    }
+
+    .custom-button {
+      border: none;
+      font-size: 20px;
+      padding: 5px 10px;
+      background-color: dodgerblue;
+      color: white;
+    }
+  </style>
+</html>
